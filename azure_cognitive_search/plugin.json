@@ -1,0 +1,17 @@
+{
+  "id": "azure_cognitive_search_dev",
+  "schema_version": "v1",
+  "name_for_human": "azure cognitive search",
+  "name_for_model": "azure cognitive search",
+  "description_for_human": "chat with docs",
+  "description_for_model": "use this plugin to chat with docs uploaded by user",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "AzureCognitiveSearch",
+    "azure_cognitive_search_params": {
+      "indexName": "githubopentechpdfs"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "電子時報",
+  "schema_version": "電子時報",
+  "name_for_human": "電子時報",
+  "name_for_model": "電子時報",
+  "description_for_human": "電子時報 Description",
+  "description_for_model": "Only need to input single keyword for search, do not extend to other strings",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "python",
+    "python": {
+      "source": "from pyodide.http import pyfetch\nimport asyncio\nimport base64\napi_id = 'xxxxx'\napi_key = 'xxxxx'\napi_channel = 'CH003'\nout_str = ''\n\ntoken = data = ''\nauth_path = 'https://apps.digitimes.com/api/auth/'\n\nparams = await infer_params(\n    conversation=CURRENT_CONVERSATION,\n    description=\"\"\"\n        Use this search function to get more information about user requests from wiki.\n        In addition to user's original query, please also break down user's needs and generate another 2 different queries in the same language resulting in total 3 queries.\n    \"\"\",\n    parameters={\n        \"type\": \"object\",\n        \"properties\": {\n            \"queries\": {\n                \"type\": \"array\",\n                \"items\": {\n                    \"type\": \"string\",\n                    \"description\": \"query to search for on the wiki\"\n                }\n            }\n        },\n        \"required\": [\"queries\"]\n    }\n)\n\nfor q in params[\"queries\"]:\n    if ' ' in q:\n        q = f'({q})'\n    if q != '':\n        out_str = out_str+q+' OR '\n\nout_str = out_str.rstrip(' OR ')\n\ndef basic_auth(username, password):\n    token = base64.b64encode(f\"{username}:{password}\".encode('utf-8')).decode(\"ascii\")\n    return f'Basic {token}'\n\nasync def authenticate():\n    response = await pyfetch(auth_path,method=\"POST\",headers={\n        \"Authorization\": basic_auth(api_id, api_key)\n    })\n    if response.status == 200:\n        response_json = await response.json()\n        if response_json['success'] == True:\n            return response_json['data']['token']\n        return None\n\nasync def fetch_data(token,out_str):\n    end_path = 'https://apps.digitimes.com/api/search/'\n    api_params = {\n        'api_id': api_id,\n        'token': token,\n        'channel': api_channel,\n        'query': out_str,\n        'scope': 0,\n        'sort': 4,\n        'start': '2023/01/01',\n        'end': '2023/12/31',\n        'items': 5\n    }\n    \n    query_string = \"&\".join([f\"{key}={value}\" for key, value in api_params.items()])\n    url = f\"{end_path}?{query_string}\"\n    response = await pyfetch(url,method=\"GET\")\n    \n    if response.status == 200:\n        return await response.json()\n    return None\n\nasync def main():\n    token = await authenticate()\n    if token:\n        data = await fetch_data(token,out_str)\n        if data:\n            return data\n\nawait main()"
+    }
+  }
+}

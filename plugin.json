@@ -1,0 +1,17 @@
+{
+  "id": "DIGINews",
+  "schema_version": "v1",
+  "name_for_human": "DIGINews",
+  "name_for_model": "DIGINews",
+  "description_for_human": "DIGINews Description",
+  "description_for_model": "DIGINews Description",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "python",
+    "python": {
+      "source": ""
+    }
+  }
+}

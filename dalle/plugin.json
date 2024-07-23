@@ -1,0 +1,18 @@
+{
+  "id": "DALLE",
+  "schema_version": "v1",
+  "name_for_model": "DALLE",
+  "name_for_human": "DALLE",
+  "description_for_model": "Generate images with DALLE model based on the description provided by the user",
+  "description_for_human": "Generate images based on the description provided by the user",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "python",
+    "python": {
+      "source": "",
+      "direct_response": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "ShowDiagrams",
+  "schema_version": "v1",
+  "name_for_model": "ShowDiagrams",
+  "name_for_human": "Show Me Diagrams",
+  "description_for_model": "You should use this plugin when people want visualizations. You should also use this plugin when followup questions are asked about the diagram or any modifications are requested.\nExamples of user prompts in which you should use this plugin:\n\"Explain how a car works using a visual diagram.\"\n\"Describe the process of making a car.\"\n\"How does a car engine work?\"\n\"Show me how ... works.\"\n\"Show me a diagram of ... .\"\n\"Show me how UIView lifecycle works.\"",
+  "description_for_human": "Create and edit diagrams directly in chat.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "python",
+    "python": {
+      "source": ""
+    }
+  }
+}

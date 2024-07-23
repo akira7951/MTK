@@ -1,0 +1,17 @@
+{
+  "id": "MyPluginDev",
+  "schema_version": "v1",
+  "name_for_human": "MyPluginDev",
+  "name_for_model": "MyPluginDev",
+  "description_for_human": "MyPluginDev",
+  "description_for_model": "this plugin can do keyword extraction and summarization from the conversation",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "python",
+    "python": {
+      "source": ""
+    }
+  }
+}
